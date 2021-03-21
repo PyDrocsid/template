@@ -1,5 +1,14 @@
 # PyDrocsid Bot Template
 
+## Template Instructions
+- [ ] Adjust name, repository and author in [config.yml](https://github.com/PyDrocsid/template/blob/develop/config.yml)
+- [ ] Replace the banner in [bot/pydrocsid_bot.py#L19](https://github.com/PyDrocsid/template/blob/develop/bot/pydrocsid_bot.py#L19). You can generate one on [this website](http://www.patorjk.com/software/taag/#p=display&f=Slant&t=PyDrocsid%20Bot).
+- [ ] Adjust repository in [Dockerfile#L21](https://github.com/PyDrocsid/template/blob/develop/Dockerfile#L21)
+- [ ] Adjust docker image tags in [.github/workflows/ci.yml#L9](https://github.com/PyDrocsid/template/blob/develop/.github/workflows/ci.yml#L9)
+- [ ] Enable push to docker registries in [.github/workflows/ci.yml#L158](https://github.com/PyDrocsid/template/blob/develop/.github/workflows/ci.yml#L158)
+- [ ] Add reviewers in [.github/dependabot.yml](https://github.com/PyDrocsid/template/blob/develop/.github/dependabot.yaml)
+- [ ] Adjust this [README.md](https://github.com/PyDrocsid/template/blob/develop/README.md) and remove this section
+
 ## Development
 ### Prerequisites
 - [Python](https://python.org/) >=3.9
