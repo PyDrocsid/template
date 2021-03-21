@@ -11,7 +11,7 @@ from PyDrocsid.environment import TOKEN
 from PyDrocsid.events import listener
 from PyDrocsid.logger import get_logger
 from PyDrocsid.util import get_prefix, make_error
-from cogs.custom import CustomBotInfoCog, CustomServerInfoCog
+from cogs.custom import CustomServerInfoCog
 from cogs.library import *
 from cogs.library.information.help.cog import send_help
 
@@ -62,40 +62,14 @@ load_cogs(
     RolesCog(),
     PermissionsCog(),
     SettingsCog(),
-    SudoCog(),
-
-    # Moderation
-    ModCog(),
-    LoggingCog(),
-    MessageCog(),
-    MediaOnlyCog(),
-    InvitesCog(),
-    AutoModCog(),
-    VerificationCog(),
-    SpamDetectionCog(),
 
     # Information
-    CustomBotInfoCog(),
-    CodeblocksCog(),
-    HeartbeatCog(),
+    BotInfoCog(),
     HelpCog(),
-    MetaQuestionCog(),
     CustomServerInfoCog(),
-    MemberInfoCog(),
-
-    # Integrations
-    AdventOfCodeCog(),
-    DiscordpyDocumentationCog(),
-    RedditCog(),
-    RunCodeCog(),
 
     # General
-    BeTheProfessionalCog(),
-    PollsCog(),
-    ReactionPinCog(),
-    ReactionRoleCog(),
     UtilsCog(),
-    VoiceChannelCog(),
 )
 # fmt: on
 

@@ -1,4 +1,4 @@
 [submodule "morpheushelper/cogs/library"]
-	path = morpheushelper/cogs/library
+	path = bot/cogs/library
 	url = git@github.com:PyDrocsid/cogs.git
 	branch = develop

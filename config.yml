@@ -1,8 +1,8 @@
-name: MorpheusHelper
+name: PyDrocsid Bot
 
 repo:
-  owner: Defelo
-  name: MorpheusHelper
+  owner: PyDrocsid
+  name: template
   icon: "https://github.com/Defelo.png"
 
 author: Defelo
@@ -20,14 +20,6 @@ roles:
     name: Moderator
     check_assignable: false
 
-  supp:
-    name: Supporter
-    check_assignable: false
-
-  team:
-    name: Team
-    check_assignable: false
-
   mute:
     name: Mute
     check_assignable: true
@@ -35,7 +27,7 @@ roles:
 permission_levels:
   administrator:
     name: Administrator
-    level: 3
+    level: 2
     aliases: [admin, a]
     if:
       permissions: [administrator]
@@ -43,17 +35,10 @@ permission_levels:
 
   moderator:
     name: Moderator
-    level: 2
+    level: 1
     aliases: [mod, m]
     if:
       roles: [mod]
-
-  supporter:
-    name: Supporter
-    level: 1
-    aliases: [supp, sup, s]
-    if:
-      roles: [supp]
 
 default_permission_level: administrator
 default_permission_overrides:
@@ -62,4 +47,4 @@ default_permission_overrides:
     stop: owner
     kill: owner
 
-teamler_level: supporter
+teamler_level: moderator

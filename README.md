@@ -1,5 +1,4 @@
-# MorpheusHelper
-Bot for the [Discord Server of The Morpheus Tutorials](https://discord.gg/themorpheus)
+# PyDrocsid Bot Template
 
 ## Development
 ### Prerequisites
