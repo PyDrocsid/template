@@ -14,7 +14,7 @@ ARG PIPENV_VENV_IN_PROJECT=true
 RUN pipenv install --deploy --ignore-pipfile
 
 COPY .git /build/.git/
-RUN git describe --tags > VERSION
+RUN git describe --tags --always > VERSION
 
 FROM python:3.9-alpine
 
@@ -33,6 +33,6 @@ COPY --from=builder /build/.venv/lib /usr/local/lib
 COPY --from=builder /build/VERSION /app/
 
 COPY config.yml /app/
-COPY morpheushelper /app/morpheushelper/
+COPY bot /app/bot/
 
 CMD ["python", "bot/pydrocsid_bot.py"]
