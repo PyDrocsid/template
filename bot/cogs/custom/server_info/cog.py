@@ -2,7 +2,7 @@ from typing import Optional
 
 from discord import Member, Role, Guild
 
-from PyDrocsid.settings import Settings
+from PyDrocsid.settings import RoleSettings
 from PyDrocsid.translations import t
 from cogs.library import ServerInfoCog
 
@@ -12,7 +12,7 @@ t = t.server_info
 class CustomServerInfoCog(ServerInfoCog, name="Server Information"):
     async def get_users(self, guild: Guild) -> list[tuple[str, list[Member]]]:
         async def get_role(role_name) -> Optional[Role]:
-            return guild.get_role(await Settings.get(int, role_name + "_role"))
+            return guild.get_role(await RoleSettings.get(role_name))
 
         out = []
 
