@@ -1,13 +1,17 @@
-from typing import Iterable
+import asyncio
+from typing import Iterable, Callable, Awaitable
 
 import sentry_sdk
 from discord import Intents, Message, Guild
 from discord.ext.commands import Bot, Context, CommandError, CommandNotFound, UserInputError, CommandInvokeError
+from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 
 from PyDrocsid.cog import load_cogs
 from PyDrocsid.command import reply, make_error
-from PyDrocsid.database import db
-from PyDrocsid.environment import TOKEN
+from PyDrocsid.config import Config
+from PyDrocsid.database import db, db_context
+from PyDrocsid.environment import TOKEN, ROOT_PATH, DEBUG
 from PyDrocsid.events import listener
 from PyDrocsid.logger import get_logger
 from PyDrocsid.prefix import get_prefix
@@ -34,6 +38,36 @@ async def fetch_prefix(_, msg: Message) -> Iterable[str]:
 
 bot = Bot(command_prefix=fetch_prefix, case_insensitive=True, intents=(Intents.all()))
 bot.remove_command("help")
+
+fastapi = FastAPI(title=Config.NAME, version=Config.VERSION, root_path=ROOT_PATH)
+
+if DEBUG:
+    fastapi.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+
+@fastapi.middleware("http")
+async def db_session(request: Request, call_next: Callable[..., Awaitable]):
+    async with db_context():
+        return await call_next(request)
+
+
+@fastapi.on_event("startup")
+async def on_startup():
+    await db.create_tables()
+
+    logger.debug("logging in")
+    asyncio.create_task(bot.start(TOKEN))
+
+
+@fastapi.head("/status", tags=["status"])
+async def status():
+    pass
 
 
 @listener
@@ -71,6 +105,7 @@ async def on_permission_error(guild: Guild, error: str):
 # fmt: off
 load_cogs(
     bot,
+    fastapi,
 
     # Administration
     RolesCog(),

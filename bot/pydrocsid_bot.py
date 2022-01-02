@@ -1,7 +1,9 @@
 from pathlib import Path
 
+import uvicorn
+
 from PyDrocsid.config import Config, load_config_file, load_version
-from PyDrocsid.environment import SENTRY_DSN
+from PyDrocsid.environment import SENTRY_DSN, ENABLE_API, HOST, PORT
 from PyDrocsid.logger import setup_sentry, get_logger
 
 logger = get_logger(__name__)
@@ -33,4 +35,9 @@ if SENTRY_DSN:
     logger.debug("initializing sentry")
     setup_sentry(SENTRY_DSN, Config.NAME, Config.VERSION)
 
-__import__("bot").run()
+if ENABLE_API:
+    uvicorn.run("bot:fastapi", host=HOST, port=PORT)
+else:
+    from bot import run  # noqa: E402
+
+    run()
